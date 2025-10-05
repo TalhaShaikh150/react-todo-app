@@ -99,7 +99,7 @@ const Todo = () => {
               </div>
               <button
                 onClick={addTodo}
-                className="bg-blue-600 hover:bg-blue-700 text-white p-4 rounded-xl text-2xl transition-colors duration-200"
+                className="bg-blue-500 hover:bg-blue-700 text-white p-4 rounded-xl text-2xl transition-colors duration-200 cursor-pointer"
               >
                 <FaPlus />
               </button>
@@ -150,7 +150,6 @@ const Todo = () => {
                   </button>
                 </div>
               </div> */}
-              
             </div>
           </div>
 
