@@ -12,7 +12,9 @@ const Todo = () => {
   const [input, setInput] = useState("");
 
   const [showAlert, setAlert] = useState(false);
-
+  const [pendingTodos, SetPending] = useState(0);
+  const [completedTodos, SetCompleted] = useState(0);
+  
   const handleInput = (e) => {
     setInput(e.target.value);
   };
@@ -41,9 +43,25 @@ const Todo = () => {
 
   {
     useEffect(() => {
-      console.log("Updated todos:", todo);
+      const pendingTodos = todo.filter(
+        (item) => item.todoStatus === "Pending"
+      ).length;
+
+      SetPending(pendingTodos);
+
+      const completedTodos = todo.filter(
+        (item) => item.todoStatus === "Completed"
+      ).length;
+      SetCompleted(completedTodos);
     }, [todo]);
   }
+
+  const updateTodoStatus = (index, isCompleted) => {
+    const newTodos = [...todo]; // copy the array
+    newTodos[index].todoStatus = isCompleted ? "Completed" : "Pending"; // update directly
+    setTodo(newTodos); // update state
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 py-8 px-4">
       <div className="max-w-lg mx-auto">
@@ -66,12 +84,14 @@ const Todo = () => {
               </div>
               <div className="text-center">
                 <p className="text-gray-400 text-sm">Completed</p>
-                <p className="text-green-400 font-bold text-xl">0</p>
+                <p className="text-green-400 font-bold text-xl">
+                  {completedTodos}
+                </p>
               </div>
               <div className="text-center">
                 <p className="text-gray-400 text-sm">Pending</p>
                 <p className="text-yellow-400 font-bold text-xl">
-                  {todo.length}
+                  {pendingTodos}
                 </p>
               </div>
             </div>
@@ -124,7 +144,12 @@ const Todo = () => {
             <div className="space-y-4">
               {/* Completed Task */}
               {todo.map((todoItem, index) => (
-                <TodoData key={index} id={index} todo={todoItem} />
+                <TodoData
+                  key={index}
+                  id={index}
+                  todo={todoItem}
+                  updateStatus={updateTodoStatus}
+                />
               ))}
 
               {/* Active Task */}

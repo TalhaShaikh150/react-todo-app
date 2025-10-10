@@ -1,16 +1,17 @@
-import "./App.css";
-import Todo from "./Components/Todo";
+// import Timer from "./Components/Timer";
 // import Abc from "./Components/Abc";
 // import Api from "./Components/Api";
-// import TodoData from "./Components/TodoData";
-
+import "./App.css";
+import { Navbar } from "./Components/Navbar";
+import Todo from "./Components/Todo";
 function App() {
   return (
     <>
+      <Todo />
+      {/* <Timer/> */}
       {/* <Abc/> */}
       {/* <Api/> */}
-      <Todo />
-      {/* <TodoData/> */}
+      {/* <Navbar /> */}
     </>
   );
 }

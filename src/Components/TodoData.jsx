@@ -3,8 +3,8 @@ import { FaCheck } from "react-icons/fa6";
 import { FaRegEdit, FaPlus } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 
-const TodoData = ({ id, todo }) => {
-  const [completed, setComplete] = useState(false);
+const TodoData = ({ id, todo, updateStatus }) => {
+    const [completed, setComplete] = useState(false);
 
   return (
     <div className="flex items-center justify-between p-4 bg-gray-700 rounded-xl border border-gray-600 hover:border-gray-500 transition-colors duration-200">
@@ -15,8 +15,10 @@ const TodoData = ({ id, todo }) => {
             !completed
               ? (todo.todoStatus = "Completed")
               : (todo.todoStatus = "Pending");
+            updateStatus(id, e.target.checked);
           }}
           type="checkbox"
+          checked={todo.todoStatus === "Completed"}
           className="w-6 h-6 appearance-none rounded-full border-2 border-yellow-400 checked:bg-green-300  checked:border-green-400 cursor-pointer transition-all"
         />
 
@@ -45,7 +47,7 @@ const TodoData = ({ id, todo }) => {
         <button className="text-gray-400 hover:text-red-400 p-2 text-2xl rounded-lg hover:bg-gray-600 cursor-pointer transition-colors">
           <MdDelete
             onClick={() => {
-              console.log(id);
+              console.log();
             }}
           />
         </button>
